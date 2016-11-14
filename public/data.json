@@ -1,0 +1,162 @@
+{
+    "data": {
+        "monitors": [
+            {
+                "attributes": {},
+                "lines": [
+                    {
+                        "barrierFree": true,
+                        "departures": {
+                            "departure": [
+                                {
+                                    "departureTime": {
+                                        "countdown": 4,
+                                        "timePlanned": "2016-11-14T12:07:00.000+0100",
+                                        "timeReal": "2016-11-14T12:07:30.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 19,
+                                        "timePlanned": "2016-11-14T12:22:00.000+0100",
+                                        "timeReal": "2016-11-14T12:22:30.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 34,
+                                        "timePlanned": "2016-11-14T12:37:00.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 49,
+                                        "timePlanned": "2016-11-14T12:52:00.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 64,
+                                        "timePlanned": "2016-11-14T13:07:00.000+0100"
+                                    }
+                                }
+                            ]
+                        },
+                        "direction": "R",
+                        "lineId": 484,
+                        "name": "84A",
+                        "realtimeSupported": true,
+                        "richtungsId": "2",
+                        "towards": "Aspernstra\u00dfe U",
+                        "trafficjam": false,
+                        "type": "ptBusCity"
+                    }
+                ],
+                "locationStop": {
+                    "geometry": {
+                        "coordinates": [
+                            16.4966528944181,
+                            48.2250611634079
+                        ],
+                        "type": "Point"
+                    },
+                    "properties": {
+                        "attributes": {
+                            "rbl": 3362
+                        },
+                        "coordName": "WGS84",
+                        "municipality": "Wien",
+                        "municipalityId": 90001,
+                        "name": "60201341",
+                        "title": "Johann-Kutschera-Gasse",
+                        "type": "stop"
+                    },
+                    "type": "Feature"
+                }
+            },
+            {
+                "attributes": {},
+                "lines": [
+                    {
+                        "barrierFree": true,
+                        "departures": {
+                            "departure": [
+                                {
+                                    "departureTime": {
+                                        "countdown": 6,
+                                        "timePlanned": "2016-11-14T12:09:00.000+0100",
+                                        "timeReal": "2016-11-14T12:09:30.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 21,
+                                        "timePlanned": "2016-11-14T12:24:00.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 36,
+                                        "timePlanned": "2016-11-14T12:39:00.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 51,
+                                        "timePlanned": "2016-11-14T12:54:00.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 52,
+                                        "timePlanned": "2016-11-14T12:55:00.000+0100"
+                                    }
+                                },
+                                {
+                                    "departureTime": {
+                                        "countdown": 67,
+                                        "timePlanned": "2016-11-14T13:10:00.000+0100"
+                                    }
+                                }
+                            ]
+                        },
+                        "direction": "H",
+                        "lineId": 484,
+                        "name": "84A",
+                        "realtimeSupported": true,
+                        "richtungsId": "1",
+                        "towards": "Seestadt U",
+                        "trafficjam": false,
+                        "type": "ptBusCity"
+                    }
+                ],
+                "locationStop": {
+                    "geometry": {
+                        "coordinates": [
+                            16.4966259449595,
+                            48.2250013170396
+                        ],
+                        "type": "Point"
+                    },
+                    "properties": {
+                        "attributes": {
+                            "rbl": 3360
+                        },
+                        "coordName": "WGS84",
+                        "municipality": "Wien",
+                        "municipalityId": 90001,
+                        "name": "60201341",
+                        "title": "Johann-Kutschera-Gasse",
+                        "type": "stop"
+                    },
+                    "type": "Feature"
+                }
+            }
+        ]
+    },
+    "message": {
+        "messageCode": 1,
+        "serverTime": "2016-11-14T12:02:32.769+0100",
+        "value": "OK"
+    }
+}
