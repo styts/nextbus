@@ -7,7 +7,14 @@
 ;  atoms  ;
 ;;;;;;;;;;;
 
-(def monitors (reagent/atom []))
+(def monitors
+  (reagent/atom
+    [
+     {:stop-name "My Stop" :transport "84A" :destination "Seestadt"
+      :departures ["12 minutes" "whenever"]}
+     {:stop-name "My Stop" :transport "U2" :destination "Someplace"
+      :departures ["3 minutes" "someday"]}
+     ]))
 
 ;;;;;;;;;;
 ;  ajax  ;
@@ -15,32 +22,35 @@
 
 (defn receive-data [response]
   (let [mons (get (get response "data") "monitors")]
-    (reset! monitors mons)
+    (reset! monitors (map wl/transform-data mons))
     (.info js/console mons)))
-
-(GET "/data.json" {:handler receive-data})
 
 ;;;;;;;;;;;;;;;;
 ;  components  ;
 ;;;;;;;;;;;;;;;;
 
-(defn render-monitor [monitor]
-  [:div ["monitor" (str monitor)]])
+(defn departures [m]
+  (map #(with-meta (vec [:li %]) {:key %}) (:departures m)))
+
+(defn render-monitor [m]
+  [:div.monitor
+   [:div.heading
+    [:span.transport (:transport m)]
+    [:span.stop-name (:stop-name m)]
+    [:span "->"]
+    [:span.stop-name (:destination m)]]
+   [:ul (departures m)]
+   ])
 
 (defn render-monitors [mons]
-  [:div (map render-monitor mons)])
+  (into [:div.monitors] (map (partial vector render-monitor) mons)))
 
 ;; -------------------------
 ;; Views
-(defn box []
-  [:div.box])
-
-;(defn boxes [] [:div (repeat 3 (box))])
 
 (defn home-page []
   [:div [:h2 "Next bus"]
-   [render-monitors @monitors]
-   ])
+   [render-monitors @monitors]])
 
 ;; -------------------------
 ;; Initialize app
@@ -49,4 +59,6 @@
   (reagent/render [home-page] (.getElementById js/document "app")))
 
 (defn init! []
-  (mount-root))
+  (do
+    (mount-root)
+    (GET "/data.json" {:handler receive-data})))

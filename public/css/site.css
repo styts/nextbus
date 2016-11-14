@@ -33,9 +33,17 @@ a:hover {
   text-decoration: underline;
 }
 
-.box {
-    border: 2px solid #ccf;
-    min-height: 30px;
-    width: 300px;
+.monitors {
+    border: 1px solid #ccf;
+    padding: 10px;
+}
+
+.monitor {
+    border: 1px solid #ccf;
     margin: 10px;
 }
+
+.stop-name {
+    margin: 5px;
+}
+

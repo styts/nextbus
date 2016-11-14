@@ -1,8 +1,24 @@
-(ns rfproject.wienerlinien
-  (:require [ajax.core :refer [GET POST]]))
+(ns rfproject.wienerlinien)
 
-;(def a (range 1 4))
+(defn stop-name [m]
+  (get (get (get m "locationStop") "properties") "title"))
 
-;(GET "/hello")
+(defn transport [m]
+  (get (first (get m "lines")) "name"))
 
-;(slurp "http://www.wienerlinien.at/ogd_realtime/monitor?rbl=3360&rbl=3362&sender=lAlQnOt2p6D8HdvL")
+(defn destination [m]
+  (get (first (get m "lines")) "towards"))
+
+(defn extract-time [departure]
+  (get departure "timeReal" (get departure "timePlanned")))
+
+(defn departures [m]
+  (map #(extract-time (get % "departureTime"))
+       (get (get (first (get m "lines")) "departures") "departure")))
+
+(defn transform-data [m]
+  {:stop-name (stop-name m)
+   :transport (transport m)
+   :destination (destination m)
+   :departures (departures m)
+   })
