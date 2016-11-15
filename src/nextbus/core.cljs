@@ -7,7 +7,7 @@
 ;  atoms  ;
 ;;;;;;;;;;;
 
-(def monitors
+(defonce monitors
   (reagent/atom
     [
      {:stop-name "My Stop" :transport "84A" :destination "Seestadt"
