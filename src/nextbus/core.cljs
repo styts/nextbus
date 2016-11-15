@@ -1,6 +1,6 @@
-(ns rfproject.core
+(ns nextbus.core
     (:require [reagent.core :as reagent]
-              [rfproject.wienerlinien :as wl]
+              [nextbus.wienerlinien :as wl]
               [ajax.core :refer [GET POST]]
                ))
 ;;;;;;;;;;;

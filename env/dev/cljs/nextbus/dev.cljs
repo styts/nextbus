@@ -1,5 +1,5 @@
-(ns ^:figwheel-no-load rfproject.dev
-  (:require [rfproject.core :as core]
+(ns ^:figwheel-no-load nextbus.dev
+  (:require [nextbus.core :as core]
             [figwheel.client :as figwheel :include-macros true]))
 
 (enable-console-print!)

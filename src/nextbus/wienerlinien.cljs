@@ -1,4 +1,4 @@
-(ns rfproject.wienerlinien)
+(ns nextbus.wienerlinien)
 
 (defn stop-name [m]
   (get (get (get m "locationStop") "properties") "title"))
