@@ -45,15 +45,17 @@
 (defn render-monitors [mons]
   (into [:div.monitors] (map (partial vector render-monitor) mons)))
 
-;; -------------------------
-;; Views
+;;;;;;;;;;;
+;  views  ;
+;;;;;;;;;;;
 
 (defn home-page []
   [:div [:h2 "Next bus"]
    [render-monitors @monitors]])
 
-;; -------------------------
-;; Initialize app
+;;;;;;;;;;;;;;;;;;;;
+;  initialize app  ;
+;;;;;;;;;;;;;;;;;;;;
 
 (defn mount-root []
   (reagent/render [home-page] (.getElementById js/document "app")))
