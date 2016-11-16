@@ -37,7 +37,7 @@
   (let [ts (str->time ts)
         till (till ts)]
     (if (<= 0 till)
-      [:li
+      [:li.departure
        [:span.mh (mh ts)]
        [:span.till till]
        ])))
@@ -49,7 +49,7 @@
     [:span.stop-name (:stop-name m)]
     [:span "->"]
     [:span.stop-name (:destination m)]]
-   (into [:div.departures] (map (partial vector depart-li) (:departures m)))
+   (into [:div.departures] (take 5 (map (partial vector depart-li) (:departures m))))
    ])
 
 (defn render-monitors [mons]

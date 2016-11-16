@@ -1,58 +1,59 @@
 body {
-  font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-top: 72px;
-  -webkit-font-smoothing: antialiased;
-  font-size: 1.125em;
-  color: #333;
-  line-height: 1.5em;
+    font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 72px;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.125em;
+    color: #333;
+    background-color: #aaa;
+    line-height: 1.5em;
 }
 
-h1, h2, h3 {
-  color: #000;
-}
-h1 {
-  font-size: 2.5em
-}
+/**************
+*  monitors  *
+**************/
 
-h2 {
-  font-size: 2em
-}
-
-h3 {
-  font-size: 1.5em
-}
-
-a {
-  text-decoration: none;
-  color: #09f;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.monitors {
-    border: 1px solid #ccf;
+div.monitors {
     padding: 10px;
 }
 
 div.monitor {
-    border: 1px solid #ccf;
+    background-color: #ccc;
+    border: 2px solid #aaa;
+    border-radius: 8px;
     margin: 10px;
     overflow: hidden;
+    padding: 10px 0px 12px 5px;
+}
+div.heading {
+    margin-bottom: 5px;
 }
 
-.stop-name {
+span.stop-name {
     margin: 5px;
 }
 
+/****************
+*  departures  *
+****************/
 
-li {
+li.departure {
     display: inline;
+    border: 2px solid #666;
+    border-radius: 4px;
+    margin: 20px 5px 10px 5px;
+    overflow: hidden;
+    padding: 5px 0px 5px 0px;
 }
-li span {
-    margin: 5px;
+li.departure span {
     white-space:nowrap;
+    padding: 5px;
+}
+li.departure span.mh {
+    background-color: #fff;
+}
+li.departure span.till {
+    background-color: #000;
+    color: #fff;
 }
