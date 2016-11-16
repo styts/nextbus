@@ -9,7 +9,10 @@ body {
     background-color: #aaa;
     line-height: 1.5em;
 }
-
+img.loading {
+    display: block;
+    margin: 72px auto;
+}
 /**************
 *  monitors  *
 **************/
