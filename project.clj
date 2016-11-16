@@ -8,6 +8,7 @@
                  [org.clojure/clojurescript "1.9.229" :scope "provided"]
                  [reagent "0.6.0"]
                  [cljs-ajax "0.5.8"]
+                 [com.andrewmcveigh/cljs-time "0.4.0"]
                  [cheshire "5.6.3"]
                  [binaryage/devtools "0.8.3"]
                  ]

@@ -1,6 +1,7 @@
 (ns nextbus.core
     (:require [reagent.core :as reagent]
-              [nextbus.wienerlinien :as wl]
+              [nextbus.time :refer [str->time mh till]]
+              [nextbus.wienerlinien :refer [transform-data]]
               [ajax.core :refer [GET POST]]
                ))
 ;;;;;;;;;;;
@@ -11,9 +12,9 @@
   (reagent/atom
     [
      {:stop-name "My Stop" :transport "84A" :destination "Seestadt"
-      :departures ["12 minutes" "whenever"]}
+      :departures ["2016-11-15T11:41:16.920+0100"]}
      {:stop-name "My Stop" :transport "U2" :destination "Someplace"
-      :departures ["3 minutes" "someday"]}
+      :departures ["2016-11-15T11:46:16.920+0100"]}
      ]))
 
 ;;;;;;;;;;
@@ -22,15 +23,24 @@
 
 (defn receive-data [response]
   (let [mons (get (get response "data") "monitors")]
-    (reset! monitors (map wl/transform-data mons))
+    (reset! monitors (map transform-data mons))
     (.info js/console mons)))
+
+(defn fetch-data []
+  (GET "/data.json" {:handler receive-data}))
 
 ;;;;;;;;;;;;;;;;
 ;  components  ;
 ;;;;;;;;;;;;;;;;
 
-(defn departures [m]
-  (map #(with-meta (vec [:li %]) {:key %}) (:departures m)))
+(defn depart-li [ts]
+  (let [ts (str->time ts)
+        till (till ts)]
+    (if (<= 0 till)
+      [:li
+       [:span.mh (mh ts)]
+       [:span.till till]
+       ])))
 
 (defn render-monitor [m]
   [:div.monitor
@@ -39,7 +49,7 @@
     [:span.stop-name (:stop-name m)]
     [:span "->"]
     [:span.stop-name (:destination m)]]
-   [:ul (departures m)]
+   (into [:div.departures] (map (partial vector depart-li) (:departures m)))
    ])
 
 (defn render-monitors [mons]
@@ -50,7 +60,7 @@
 ;;;;;;;;;;;
 
 (defn home-page []
-  [:div [:h2 "Next bus"]
+  [:div ;[:h2 "Next bus"]
    [render-monitors @monitors]])
 
 ;;;;;;;;;;;;;;;;;;;;
@@ -61,6 +71,5 @@
   (reagent/render [home-page] (.getElementById js/document "app")))
 
 (defn init! []
-  (do
-    (mount-root)
-    (GET "/data.json" {:handler receive-data})))
+  (do (mount-root)
+      (fetch-data)))

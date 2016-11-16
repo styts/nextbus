@@ -38,12 +38,21 @@ a:hover {
     padding: 10px;
 }
 
-.monitor {
+div.monitor {
     border: 1px solid #ccf;
     margin: 10px;
+    overflow: hidden;
 }
 
 .stop-name {
     margin: 5px;
 }
 
+
+li {
+    display: inline;
+}
+li span {
+    margin: 5px;
+    white-space:nowrap;
+}
