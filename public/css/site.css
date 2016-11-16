@@ -24,10 +24,15 @@ div.monitor {
     border-radius: 8px;
     margin: 10px;
     overflow: hidden;
-    padding: 10px 0px 12px 5px;
+    padding: 0px 0px 12px 0px;
 }
 div.heading {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    background-color: #E3010F;
+    color: #fff;
+    text-align: center;
+    border-bottom: 2px solid #aaa;
+    padding: 3px;
 }
 
 span.stop-name {
