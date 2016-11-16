@@ -2,6 +2,7 @@
     (:require [reagent.core :as reagent]
               [nextbus.time :refer [str->time mh till]]
               [nextbus.wienerlinien :refer [transform-data]]
+              [nextbus.utils :as u]
               [ajax.core :refer [GET POST]]
                ))
 ;;;;;;;;;;;
@@ -46,6 +47,8 @@
 (defn render-monitor [m]
   [:div.monitor
    [:div.heading
+    ;[:span.transport (:rbl m)]
+    ;[:span " : "]
     [:span.transport (:transport m)]
     [:span.stop-name (:stop-name m)]
     [:span "->"]
@@ -61,8 +64,16 @@
 ;;;;;;;;;;;
 
 (defn home-page []
-  [:div ;[:h2 "Next bus"]
-   [render-monitors @monitors]])
+  [:div
+   [:div.direction
+    [:h2 "Aus Seestadt"]
+    [render-monitors (filter u/from-seestadt? @monitors)]
+    ]
+   [:div.direction
+    [:h2 "Nach Seestadt"]
+    [render-monitors (filter u/to-seestadt? @monitors)]
+    ]
+   ])
 
 ;;;;;;;;;;;;;;;;;;;;
 ;  initialize app  ;

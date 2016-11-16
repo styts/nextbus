@@ -3,6 +3,9 @@
 (defn stop-name [m]
   (get (get (get m "locationStop") "properties") "title"))
 
+(defn rbl [m]
+  (get (get (get (get m "locationStop") "properties") "attributes") "rbl"))
+
 (defn transport [m]
   (get (first (get m "lines")) "name"))
 
@@ -21,4 +24,5 @@
    :transport (transport m)
    :destination (destination m)
    :departures (departures m)
+   :rbl (rbl m)
    })

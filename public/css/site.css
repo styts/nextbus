@@ -1,8 +1,8 @@
 body {
     font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
-    max-width: 600px;
+    max-width: 550px;
     margin: 0 auto;
-    padding-top: 72px;
+    padding-top: 1em;
     -webkit-font-smoothing: antialiased;
     font-size: 1.125em;
     color: #333;
@@ -13,13 +13,22 @@ img.loading {
     display: block;
     margin: 72px auto;
 }
+h2 {
+    font-size: 1.2em;
+    margin: 0;
+    padding-left: 12px;
+    padding-top: 5px;
+}
+
+div.direction {
+    padding: 5px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
 /**************
 *  monitors  *
 **************/
-
-div.monitors {
-    padding: 10px;
-}
 
 div.monitor {
     background-color: #ccc;
