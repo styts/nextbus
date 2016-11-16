@@ -66,8 +66,8 @@
 (defn home-page []
   [:div
    [:div.direction
-    [:h2 "Aus Seestadt"]
-    [render-monitors (filter u/from-seestadt? @monitors)]
+    [:h2 "Nach Wien"]
+    [render-monitors (u/sort-by-rbls (filter u/from-seestadt? @monitors) u/rbl-from)]
     ]
    [:div.direction
     [:h2 "Nach Seestadt"]
@@ -83,5 +83,7 @@
   (reagent/render [home-page] (.getElementById js/document "app")))
 
 (defn init! []
-  (do (mount-root)
-      (fetch-data)))
+  (do
+    (fetch-data)
+    (mount-root)
+    ))

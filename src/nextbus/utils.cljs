@@ -2,12 +2,19 @@
 
 ; see README.md for the list of RBLs
 
+(def rbl-from [3362 4251 3359 4277])
+(def rbl-to [8682 3365])
+
 (defn to-seestadt? [x]
-  (contains? #{8682 3365} (:rbl x)))
+  (contains? (set rbl-to) (:rbl x)))
 
 (defn from-seestadt? [x] (not (to-seestadt? x)))
 
-(comment
-  (contains? #{8682 3365} 8682)
-  (contains? #{8682 3365} 863)
-  )
+(defn sort-by-rbls
+  "Given a seq of monitors, and a list of RBLs, sort the monitors by rbl"
+  [monitors rbls]
+    (map
+      (fn [idx] (first (filter
+                         (fn [m] (= (:rbl m) idx))
+                         monitors)))
+      rbls))
