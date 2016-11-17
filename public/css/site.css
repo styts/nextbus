@@ -74,3 +74,7 @@ li.departure span.till {
     background-color: #000;
     color: #fff;
 }
+li.departure span.till.real {
+    background-color: #E3010F;
+    color: white;
+}

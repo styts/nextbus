@@ -13,7 +13,10 @@
   (get (first (get m "lines")) "towards"))
 
 (defn extract-time [departure]
-  (get departure "timeReal" (get departure "timePlanned")))
+  (let [real (contains? departure "timeReal")]
+    {
+     :time (get departure "timeReal" (get departure "timePlanned"))
+     :real real }))
 
 (defn departures [m]
   (map #(extract-time (get % "departureTime"))

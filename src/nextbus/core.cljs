@@ -33,16 +33,21 @@
 (defonce timer (reagent/atom (js/Date.)))
 (defonce time-updater (js/setInterval #(reset! timer (js/Date.)) 1000))
 
-(defn depart-li [idx ts-string]
-  (let [ts (str->time ts-string)
+(defn depart-li [idx departure]
+  (if (:time departure) (let [
+        ts-string (:time departure)
+        real (:real departure)
+        ts (str->time ts-string)
         _ @timer
         till (till ts)]
     (if (<= 0 till)
       [:li.departure
        {:title ts-string}
        [:span.mh (mh ts)]
-       [:span.till (if (<= idx 1) (seconds->ms till) (int (divide till 60)))]
-       ])))
+       [:span.till
+        {:class (if real "real")}
+        (if real (seconds->ms till) (int (divide till 60)))]
+       ]))))
 
 (defn render-monitor [m]
   [:div.monitor
@@ -53,7 +58,7 @@
     [:span.stop-name (:stop-name m)]
     [:span "->"]
     [:span.stop-name (:destination m)]]
-   (into [:div.departures] (take 5 (map-indexed (partial vector depart-li) (:departures m))))
+   (into [:div.departures] (map-indexed (partial vector depart-li) (:departures m)))
    ])
 
 (defn render-monitors [mons]
@@ -66,7 +71,7 @@
 (defn home-page []
   [:div
    [:div.direction
-    [:h2 "Nach Wien"]
+    [:h2 "Aus Seestadt"]
     [render-monitors (u/sort-by-rbls (filter u/from-seestadt? @monitors) u/rbl-from)]
     ]
    [:div.direction
