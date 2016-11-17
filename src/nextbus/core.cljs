@@ -10,36 +10,36 @@
 ;;;;;;;;;;;
 
 (defonce monitors (reagent/atom []))
-(comment
-  "Initial value of the monitor atom"
-  [
-     {:stop-name "My Stop" :transport "84A" :destination "Seestadt"
-      :departures ["2016-11-15T11:41:16.920+0100"]}
-     {:stop-name "My Stop" :transport "U2" :destination "Someplace"
-      :departures ["2016-11-15T11:46:16.920+0100"]}
-     ]
-  )
+
+
 ;;;;;;;;;;
 ;  ajax  ;
 ;;;;;;;;;;
 
 (defn receive-data [response]
   (let [mons (get (get response "data") "monitors")]
-    (reset! monitors (map transform-data mons))
-    (.info js/console mons)))
+    (reset! monitors (map transform-data mons))))
 
 (defn fetch-data []
   (GET "/data.json" {:handler receive-data}))
+
+(defonce data-fetcher (js/setInterval fetch-data (* 2 60 1000)))
 
 ;;;;;;;;;;;;;;;;
 ;  components  ;
 ;;;;;;;;;;;;;;;;
 
-(defn depart-li [ts]
-  (let [ts (str->time ts)
+; these two ensure that the <li>s are redrawn every second
+(defonce timer (reagent/atom (js/Date.)))
+(defonce time-updater (js/setInterval #(reset! timer (js/Date.)) 1000))
+
+(defn depart-li [ts-string]
+  (let [ts (str->time ts-string)
+        _ @timer
         till (till ts)]
     (if (<= 0 till)
       [:li.departure
+       {:title ts-string}
        [:span.mh (mh ts)]
        [:span.till till]
        ])))
@@ -81,6 +81,7 @@
 
 (defn mount-root []
   (reagent/render [home-page] (.getElementById js/document "app")))
+
 
 (defn init! []
   (do
