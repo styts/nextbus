@@ -1,6 +1,6 @@
 (ns nextbus.core
     (:require [reagent.core :as reagent]
-              [nextbus.time :refer [str->time mh till]]
+              [nextbus.time :refer [seconds->ms str->time mh till]]
               [nextbus.wienerlinien :refer [transform-data]]
               [nextbus.utils :as u]
               [ajax.core :refer [GET POST]]
@@ -10,7 +10,7 @@
 ;;;;;;;;;;;
 
 (defonce monitors (reagent/atom []))
-
+; these are not the only ones
 
 ;;;;;;;;;;
 ;  ajax  ;
@@ -33,7 +33,7 @@
 (defonce timer (reagent/atom (js/Date.)))
 (defonce time-updater (js/setInterval #(reset! timer (js/Date.)) 1000))
 
-(defn depart-li [ts-string]
+(defn depart-li [idx ts-string]
   (let [ts (str->time ts-string)
         _ @timer
         till (till ts)]
@@ -41,7 +41,7 @@
       [:li.departure
        {:title ts-string}
        [:span.mh (mh ts)]
-       [:span.till till]
+       [:span.till (if (<= idx 1) (seconds->ms till) (int (divide till 60)))]
        ])))
 
 (defn render-monitor [m]
@@ -53,7 +53,7 @@
     [:span.stop-name (:stop-name m)]
     [:span "->"]
     [:span.stop-name (:destination m)]]
-   (into [:div.departures] (take 5 (map (partial vector depart-li) (:departures m))))
+   (into [:div.departures] (take 5 (map-indexed (partial vector depart-li) (:departures m))))
    ])
 
 (defn render-monitors [mons]
