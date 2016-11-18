@@ -69,7 +69,7 @@
 ;;;;;;;;;;;
 
 (defn home-page []
-  [:div
+  [:div.content
    [:div.direction
     [:h2 "Aus Seestadt"]
     [render-monitors (u/sort-by-rbls (filter u/from-seestadt? @monitors) u/rbl-from)]
