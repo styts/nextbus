@@ -12,9 +12,12 @@
 ; these are not the only atoms
 
 (defonce monitors (reagent/atom []))
-
-(defonce colors (local-storage (reagent/atom {}) :colors))
 (defonce hidden-monitors (local-storage (reagent/atom {}) :hidden-monitors))
+
+(defonce colors (local-storage (reagent/atom {3359 "violet", 4251 "green",
+                                              4277 "violet", 3365 "green",
+                                              8682 "green", 3362 "green",
+                                              3363 "orange"}) :colors))
 (def possible-colors ["red" "violet" "green" "orange"])
 
 ;;;;;;;;;;
@@ -43,7 +46,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  color of monitor headings  ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 (defn get-color [rbl]
   (get @colors rbl (first possible-colors)))
@@ -108,14 +110,26 @@
 
 (defn home-page []
   [:div.content
-   [:div.direction
+   [:div.container
     [:h2 "Aus Seestadt"]
     [render-monitors (u/sort-by-rbls (filter u/from-seestadt? @monitors) u/rbl-from)]
     ]
-   [:div.direction
+   [:div.container
     [:h2 "Nach Seestadt"]
     [render-monitors (filter u/to-seestadt? @monitors)]
-    ]])
+    ]
+   [:div.container.help
+    [:h2 "Hilfe"]
+    [:div
+     "Die Abfahrtszeiten in " [:span {:class "rot"} "rot"]
+     " sind die aktuellen, in " [:span {:class "schwarz"} "schwarz"] " die geplanten."
+     ]
+    [:div "Sie können die einzelnen Fahrtrichtungen mittels Klick farblich markieren oder mit "
+     [:i {:class "fa fa-minus-square-o" :aria-hidden "true" }]
+     " verstecken."]
+    [:div "Datenquelle: Wiener Linien"]
+    ]
+   ])
 
 ;;;;;;;;;;;;;;;;;;;;
 ;  initialize app  ;

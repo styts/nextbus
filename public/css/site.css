@@ -20,7 +20,7 @@ h2 {
     padding-top: 5px;
 }
 
-div.direction {
+div.container {
     padding: 5px;
     margin-bottom: 20px;
     background-color: #fafafa;
@@ -65,7 +65,7 @@ div.heading.red {
 }
 div.heading.violet {
     background-color: violet;
-    color: yellow;
+    color: white;
 }
 div.heading.green {
     background-color: green;
@@ -111,4 +111,17 @@ li.departure span.till {
 li.departure span.till.real {
     background-color: #E3010F;
     color: white;
+}
+.rot{
+    background-color: #E3010F;
+    color: white;
+    padding: 1px 2px 1px 2px;
+}
+.schwarz{
+    background-color: #000;
+    color: #fff;
+    padding: 1px 2px 1px 2px;
+}
+.help div{
+    padding: 4px;
 }
