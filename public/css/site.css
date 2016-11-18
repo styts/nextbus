@@ -104,11 +104,11 @@ li.departure span {
 li.departure span.mh {
     background-color: #fff;
 }
-li.departure span.till {
+li.departure span.planned {
     background-color: #000;
     color: #fff;
 }
-li.departure span.till.real {
+li.departure span.real {
     background-color: #E3010F;
     color: white;
 }

@@ -15,7 +15,7 @@
 (defonce hidden-monitors (local-storage (reagent/atom {}) :hidden-monitors))
 
 (defonce colors (local-storage (reagent/atom {3359 "violet", 4251 "green",
-                                              4277 "violet", 3365 "green",
+                                              4277 "violet", 3365 "violet",
                                               8682 "green", 3362 "green",
                                               3363 "orange"}) :colors))
 (def possible-colors ["red" "violet" "green" "orange"])
@@ -66,20 +66,19 @@
 (defonce time-updater (js/setInterval #(reset! timer (js/Date.)) 1000))
 
 (defn depart-li [idx departure]
-  (if (:time departure) (let [
-        ts-string (:time departure)
-        real (:real departure)
-        ts (str->time ts-string)
+  (let [
+        planned-str (:planned departure)
+        real-str (:real departure)
+        planned-ts (str->time planned-str)
         _ @timer
-        till (till ts)]
-    (if (<= 0 till)
+        seconds-to-planned (till planned-ts)]
+    (if (<= 0 seconds-to-planned)
       [:li.departure
-       {:title ts-string}
-       [:span.mh (mh ts)]
-       [:span.till
-        {:class (if real "real")}
-        (if real (seconds->ms till) (int (divide till 60)))]
-       ]))))
+       {:title planned-str}
+       [:span.mh (mh planned-ts)]
+       (if real-str [:span.real (seconds->ms seconds-to-planned)])
+       [:span.planned (int (divide seconds-to-planned 60))]
+       ])))
 
 (defn render-monitor [m]
   (let [rbl (:rbl m)
