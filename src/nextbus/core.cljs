@@ -86,7 +86,7 @@
         ]
     [:div.monitor { :class (cond hidden "hidden") }
      [:div.heading { :class (get-color rbl)
-                    :on-click #((if-not hidden (update-color! rbl))) }
+                    :on-click #(if-not hidden (update-color! rbl)) }
       [:span.transport (:transport m)]
       [:span.stop-name (:stop-name m)]
       [:span [:i {:class "fa fa-long-arrow-right" :aria-hidden "true" }]]
