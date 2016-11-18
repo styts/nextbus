@@ -42,6 +42,9 @@ div.monitor {
     overflow: hidden;
     padding: 0px 0px 12px 0px;
 }
+div.monitor.hidden {
+    padding: 0px;
+}
 div.heading {
     margin-bottom: 10px;
     background-color: #E3010F;
@@ -49,6 +52,12 @@ div.heading {
     text-align: center;
     border-bottom: 2px solid #aaa;
     padding: 3px;
+}
+div.monitor.hidden .heading {
+    margin-bottom: 0px;
+    background-color: #ddd;
+    color: #999;
+    border-bottom: 0px;
 }
 div.heading.red {
     background-color: #E3010F;
@@ -69,6 +78,11 @@ div.heading.orange {
 
 span.stop-name {
     margin: 5px;
+}
+
+.fa{
+    padding: 5px 5px 0 0;
+    float: right;
 }
 
 /****************
