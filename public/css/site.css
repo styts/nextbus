@@ -50,6 +50,22 @@ div.heading {
     border-bottom: 2px solid #aaa;
     padding: 3px;
 }
+div.heading.red {
+    background-color: #E3010F;
+    color: #fff;
+}
+div.heading.violet {
+    background-color: violet;
+    color: yellow;
+}
+div.heading.green {
+    background-color: green;
+    color: #fff;
+}
+div.heading.orange {
+    background-color: orange;
+    color: black;
+}
 
 span.stop-name {
     margin: 5px;

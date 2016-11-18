@@ -10,6 +10,7 @@
                  [cljs-ajax "0.5.8"]
                  [com.andrewmcveigh/cljs-time "0.4.0"]
                  [cheshire "5.6.3"]
+                 [alandipert/storage-atom "1.2.4"]
                  [binaryage/devtools "0.8.3"]
                  ]
 

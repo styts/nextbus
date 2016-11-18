@@ -4,13 +4,17 @@
               [nextbus.wienerlinien :refer [transform-data]]
               [nextbus.utils :as u]
               [ajax.core :refer [GET POST]]
+              [alandipert.storage-atom :refer [local-storage]]
                ))
 ;;;;;;;;;;;
 ;  atoms  ;
 ;;;;;;;;;;;
+; these are not the only atoms
 
 (defonce monitors (reagent/atom []))
-; these are not the only ones
+
+(defonce colors (local-storage (reagent/atom {}) :colors))
+(def possible-colors ["red" "violet" "green" "orange"])
 
 ;;;;;;;;;;
 ;  ajax  ;
@@ -49,9 +53,21 @@
         (if real (seconds->ms till) (int (divide till 60)))]
        ]))))
 
+(defn get-color [rbl]
+  (get @colors rbl (first possible-colors)))
+
+(defn update-color! [rbl]
+  (let [current (get-color rbl)
+        possible (take (inc (count possible-colors)) (cycle possible-colors))
+        idx (.indexOf possible current)
+        next-color (nth possible (inc idx))
+        ]
+    (swap! colors assoc rbl next-color)))
+
 (defn render-monitor [m]
   [:div.monitor
-   [:div.heading
+   [:div.heading { :class (get-color (:rbl m))
+                  :on-click #(update-color! (:rbl m)) }
     ;[:span.transport (:rbl m)]
     ;[:span " : "]
     [:span.transport (:transport m)]
