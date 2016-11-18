@@ -38,7 +38,6 @@
   (= true (get @hidden-monitors rbl false)))
 
 (defn toggle-hide! [rbl]
-  (pr rbl (is-hidden rbl))
   (swap! hidden-monitors assoc rbl (not (is-hidden rbl))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -83,14 +82,14 @@
 (defn render-monitor [m]
   (let [rbl (:rbl m)
         hidden (is-hidden rbl)
-        icon #(str "fa fa-" (if hidden "plus" "minus") "-square-o")
+        icon #(str "hideme fa fa-" (if hidden "plus" "minus") "-square-o")
         ]
     [:div.monitor { :class (cond hidden "hidden") }
      [:div.heading { :class (get-color rbl)
                     :on-click #((if-not hidden (update-color! rbl))) }
       [:span.transport (:transport m)]
       [:span.stop-name (:stop-name m)]
-      [:span "->"]
+      [:span [:i {:class "fa fa-long-arrow-right" :aria-hidden "true" }]]
       [:span.stop-name (:destination m)]
       [:i {:class (icon)
            :aria-hidden "true"
