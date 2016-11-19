@@ -30,6 +30,14 @@ div.container {
 div.content{
     padding: 10px;
 }
+@mixin red {
+  background-color: #E3010F;
+  color: white;
+}
+@mixin black {
+  background-color: #000;
+  color: #fff;
+}
 /**************
 *  monitors  *
 **************/
@@ -41,10 +49,17 @@ div.monitor {
     margin: 10px;
     overflow: hidden;
     padding: 0px 0px 12px 0px;
+    &.hidden{
+      padding: 0px;
+      .heading{
+        margin-bottom: 0px;
+        background-color: #ddd;
+        color: #999;
+        border-bottom: 0px;
+      }
+    }
 }
-div.monitor.hidden {
-    padding: 0px;
-}
+
 div.heading {
     margin-bottom: 10px;
     background-color: #E3010F;
@@ -52,76 +67,67 @@ div.heading {
     text-align: center;
     border-bottom: 2px solid #aaa;
     padding: 3px;
-}
-div.monitor.hidden .heading {
-    margin-bottom: 0px;
-    background-color: #ddd;
-    color: #999;
-    border-bottom: 0px;
-}
-div.heading.red {
-    background-color: #E3010F;
-    color: #fff;
-}
-div.heading.violet {
-    background-color: violet;
-    color: white;
-}
-div.heading.green {
-    background-color: green;
-    color: #fff;
-}
-div.heading.orange {
-    background-color: orange;
-    color: black;
-}
-
-span.stop-name {
-    margin: 5px;
-}
-
-.hideme{
-    padding: 5px 5px 0 0;
-    float: right;
+    &.red{
+      @include red;
+    }
+    &.violet{
+      background-color: violet;
+      color: white;
+    }
+    &.green{
+      background-color: green;
+      color: #fff;
+    }
+    &.orange{
+      background-color: orange;
+      color: black;
+    }
+    span.stop-name {
+      margin: 5px;
+    }
+    i.hideme{
+      padding: 5px 5px 0 0;
+      float: right;
+    }
 }
 
 /****************
 *  departures  *
 ****************/
-
 li.departure {
-    display: inline;
-    border: 2px solid #666;
-    border-radius: 4px;
-    margin: 20px 5px 10px 5px;
-    overflow: hidden;
-    padding: 5px 0px 5px 0px;
-}
-li.departure span {
+  display: inline;
+  border: 2px solid #666;
+  border-radius: 4px;
+  margin: 20px 5px 10px 5px;
+  overflow: hidden;
+  padding: 5px 0px 5px 0px;
+  span {
     white-space:nowrap;
     padding: 5px;
+    &.mh{
+      background-color: #fff;
+    }
+    &.planned{
+      @include black;
+    }
+    &.real{
+      @include red;
+    }
+  }
 }
-li.departure span.mh {
-    background-color: #fff;
-}
-li.departure span.planned {
-    background-color: #000;
-    color: #fff;
-}
-li.departure span.real {
-    background-color: #E3010F;
-    color: white;
-}
-.rot{
-    background-color: #E3010F;
-    color: white;
-    padding: 1px 2px 1px 2px;
-}
-.schwarz{
-    background-color: #000;
-    color: #fff;
-    padding: 1px 2px 1px 2px;
-}
+
+////////////
+//  help  //
+////////////
+
 .help div{
-    padding: 4px;
+  padding-left: 4px;
+  .rot{
+      @include red;
+      padding: 1px 2px 1px 2px;
+  }
+  .schwarz{
+      @include black;
+      padding: 1px 2px 1px 2px;
+  }
 }
