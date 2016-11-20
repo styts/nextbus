@@ -22,7 +22,7 @@
     (reset! monitors (map transform-data mons))))
 
 (defn fetch-data []
-  (GET "/data.json" {:handler receive-data}))
+  (GET "data.json" {:handler receive-data}))
 
 (defonce data-fetcher (js/setInterval fetch-data (* 2 60 1000)))
 
