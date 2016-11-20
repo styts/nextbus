@@ -1,22 +1,22 @@
 @import "_utils";
 
+
 body {
     font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
     max-width: 760px;
     margin: 0 auto;
-    padding-top: 1em;
     -webkit-font-smoothing: antialiased;
-    font-size: 1.125em;
+    font-size: 0.8em;
     color: #333;
     background-color: #aaa;
-    line-height: 1.5em;
+    @extend .noselect;
 }
 img.loading {
     display: block;
     margin: 72px auto;
 }
 h2 {
-    font-size: 1.2em;
+    font-size: 1.0em;
     margin: 0;
     padding-left: 12px;
     padding-top: 5px;
@@ -24,7 +24,7 @@ h2 {
 
 div.container {
     padding: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: #fafafa;
     border-radius: 10px;
 }
@@ -63,7 +63,6 @@ div.monitor {
 }
 
 div.heading {
-    @extend .noselect;
     margin-bottom: 10px;
     background-color: #E3010F;
     color: #fff;
@@ -89,7 +88,7 @@ div.heading {
       margin: 5px;
     }
     i.hideme{
-      padding: 5px 5px 0 0;
+      padding: 0.2em 0.2em 0 0;
       float: right;
     }
 }
@@ -101,7 +100,7 @@ li.departure {
   display: inline;
   border: 2px solid #666;
   border-radius: 4px;
-  margin: 20px 5px 10px 5px;
+  margin: 6px 5px 10px 5px;
   overflow: hidden;
   padding: 5px 0px 5px 0px;
   span {
@@ -123,7 +122,7 @@ li.departure {
 //  help  //
 ////////////
 
-.help div{
+.help p{
   padding-left: 4px;
   .rot{
       @include red;
@@ -132,5 +131,18 @@ li.departure {
   .schwarz{
       @include black;
       padding: 1px 2px 1px 2px;
+  }
+}
+
+/////////////////////
+//  media queries  //
+/////////////////////
+
+@media screen and (min-width: 480px) {
+  body {
+    font-size: 1.2em;
+  }
+  h2 {
+    font-size: 1.2em;
   }
 }

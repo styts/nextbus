@@ -92,14 +92,14 @@
     ]
    [:div.container.help
     [:h2 "Hilfe"]
-    [:div
+    [:p
      "Die Abfahrtszeiten in " [:span {:class "rot"} "rot"]
      " sind die aktuellen, in " [:span {:class "schwarz"} "schwarz"] " die geplanten."
      ]
-    [:div "Sie können die einzelnen Fahrtrichtungen mittels Klick farblich markieren oder mit "
+    [:p "Sie können die einzelnen Fahrtrichtungen mittels Klick farblich markieren oder mit "
      [:i {:class "fa fa-minus-square-o" :aria-hidden "true" }]
      " verstecken."]
-    [:div "Datenquelle: Wiener Linien"]
+    [:p "Datenquelle: Wiener Linien"]
     ]
    ])
 
