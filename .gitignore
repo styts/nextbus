@@ -16,5 +16,6 @@ pom.xml.asc
 *.log
 /.env
 .cljs_rhino_repl
-/public/data.json
+public/data.json
 public/js/release
+public/js/app.js
