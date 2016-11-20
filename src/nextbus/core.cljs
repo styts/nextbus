@@ -3,8 +3,8 @@
               [nextbus.time :refer [seconds->ms str->time mh till]]
               [nextbus.wienerlinien :refer [transform-data]]
               [nextbus.utils :as u]
+              [nextbus.prefs :as prefs]
               [ajax.core :refer [GET POST]]
-              [alandipert.storage-atom :refer [local-storage]]
                ))
 ;;;;;;;;;;;
 ;  atoms  ;
@@ -12,13 +12,6 @@
 ; these are not the only atoms
 
 (defonce monitors (reagent/atom []))
-(defonce hidden-monitors (local-storage (reagent/atom {}) :hidden-monitors))
-
-(defonce colors (local-storage (reagent/atom {3359 "violet", 4251 "green",
-                                              4277 "violet", 3365 "violet",
-                                              8682 "green", 3362 "green",
-                                              3363 "orange"}) :colors))
-(def possible-colors ["red" "violet" "green" "orange"])
 
 ;;;;;;;;;;
 ;  ajax  ;
@@ -33,30 +26,6 @@
 
 (defonce data-fetcher (js/setInterval fetch-data (* 2 60 1000)))
 
-;;;;;;;;;;;;;;;;;;;
-;  hide monitors  ;
-;;;;;;;;;;;;;;;;;;;
-
-(defn is-hidden [rbl]
-  (= true (get @hidden-monitors rbl false)))
-
-(defn toggle-hide! [rbl]
-  (swap! hidden-monitors assoc rbl (not (is-hidden rbl))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;  color of monitor headings  ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn get-color [rbl]
-  (get @colors rbl (first possible-colors)))
-
-(defn update-color! [rbl]
-  (let [current (get-color rbl)
-        possible (take (inc (count possible-colors)) (cycle possible-colors))
-        idx (.indexOf possible current)
-        next-color (nth possible (inc idx))
-        ]
-    (swap! colors assoc rbl next-color)))
 ;;;;;;;;;;;;;;;;
 ;  components  ;
 ;;;;;;;;;;;;;;;;
@@ -82,19 +51,19 @@
 
 (defn render-monitor [m]
   (let [rbl (:rbl m)
-        hidden (is-hidden rbl)
+        hidden (prefs/is-hidden rbl)
         icon #(str "hideme fa fa-" (if hidden "plus" "minus") "-square-o")
         ]
     [:div.monitor { :class (cond hidden "hidden") }
-     [:div.heading { :class (get-color rbl)
-                    :on-click #(if-not hidden (update-color! rbl)) }
+     [:div.heading { :class (prefs/get-color rbl)
+                    :on-click #(if-not hidden (prefs/update-color! rbl)) }
       [:span.transport (:transport m)]
       [:span.stop-name (:stop-name m)]
       [:span [:i {:class "fa fa-long-arrow-right" :aria-hidden "true" }]]
       [:span.stop-name (:destination m)]
       [:i {:class (icon)
            :aria-hidden "true"
-           :on-click (fn [e] (.stopPropagation e) (toggle-hide! rbl))
+           :on-click (fn [e] (.stopPropagation e) (prefs/toggle-hide! rbl))
            }]
       ]
      (if-not hidden (into [:div.departures] (map-indexed (partial vector depart-li) (:departures m))))
