@@ -34,20 +34,24 @@
 (defonce timer (reagent/atom (js/Date.)))
 (defonce time-updater (js/setInterval #(reset! timer (js/Date.)) 1000))
 
+(defn valid-departure [departure]
+  (or (:planned departure) (:real departure)))
+
 (defn depart-li [idx departure]
-  (let [
-        planned-str (:planned departure)
-        real-str (:real departure)
-        planned-ts (str->time planned-str)
-        _ @timer
-        seconds-to-planned (till planned-ts)]
-    (if (<= 0 seconds-to-planned)
-      [:li.departure
-       {:title planned-str}
-       [:span.mh (mh planned-ts)]
-       (if real-str [:span.real (seconds->ms seconds-to-planned)])
-       [:span.planned (int (divide seconds-to-planned 60))]
-       ])))
+  (if (valid-departure departure)
+    (let [
+          planned-str (:planned departure)
+          real-str (:real departure)
+          planned-ts (str->time planned-str)
+          _ @timer
+          seconds-to-planned (till planned-ts)]
+      (if (<= 0 seconds-to-planned)
+        [:li.departure
+         {:title planned-str}
+         [:span.mh (mh planned-ts)]
+         (if real-str [:span.real (seconds->ms seconds-to-planned)])
+         [:span.planned (int (divide seconds-to-planned 60))]
+         ]))))
 
 (defn render-monitor [m]
   (let [rbl (:rbl m)
