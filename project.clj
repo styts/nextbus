@@ -1,6 +1,6 @@
 (defproject nextbus "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "When does the next bus leave from/to Wien Seestadt"
+  :url "https://seestadt.cc/bus"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
