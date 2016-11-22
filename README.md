@@ -1,5 +1,7 @@
 # Seestadt Vienna public transport departures
 
+![Screenshot](public/screenshot.png?raw=true)
+
 I made this to solve the need to know when exactly the next bus departs from
 Seestadt, as well as to practice making a SPA with ClojureScript and Reagent.
 
