@@ -99,7 +99,7 @@
     [:p "Sie können die einzelnen Fahrtrichtungen mittels Klick farblich markieren oder mit "
      [:i {:class "fa fa-minus-square-o" :aria-hidden "true" }]
      " verstecken."]
-    [:p "Die quelltexte für dieses app sind auf "
+    [:p "Der Code für diese app ist auf "
      [:a {:href "https://github.com/styts/nextbus"} "github"] "."]
     [:p "Datenquelle: Wiener Linien"]
     ]
