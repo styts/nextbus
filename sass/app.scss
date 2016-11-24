@@ -116,6 +116,12 @@ li.departure {
       @include red;
     }
   }
+  &.negative{
+    opacity: 0.3;
+    &span.mh{
+
+    }
+  }
 }
 
 ////////////

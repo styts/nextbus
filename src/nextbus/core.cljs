@@ -37,6 +37,10 @@
 (defn valid-departure [departure]
   (or (:planned departure) (:real departure)))
 
+(defn li-class-helper [seconds-to-planned]
+  (if (> 0 seconds-to-planned)
+    "negative"))
+
 (defn depart-li [idx departure]
   (if (valid-departure departure)
     (let [
@@ -44,10 +48,12 @@
           real-str (:real departure)
           planned-ts (str->time planned-str)
           _ @timer
-          seconds-to-planned (till planned-ts)]
+          seconds-to-planned (till planned-ts)
+          li-class (li-class-helper seconds-to-planned)
+          ]
       (if (<= -30 seconds-to-planned)
         [:li.departure
-         {:title planned-str}
+         {:title planned-str :class li-class}
          [:span.mh (mh planned-ts)]
          (if real-str [:span.real (seconds->ms seconds-to-planned)]
          [:span.planned (int (divide seconds-to-planned 60))])
