@@ -23,13 +23,17 @@
 
 (defn seconds->ms [seconds]
   (let [m (in-minutes (cljs-time.core/seconds seconds))
-        s (- seconds (* 60 m))]
-    (str m ":"
-         (if (< s 10) (str "0" s) s))))
+        s (- seconds (* 60 m))
+        a (Math/abs s)
+        ]
+    (str (if (not (= s a)) "-") m ":"
+         (if (< a 10) (str "0" a) a))))
 
 (comment
   (seconds->ms 600)
+  (seconds->ms -20)
   (seconds->ms 601)
+  (Math/abs -29)
   (> 10 9)
   (str->time "2016-11-15T11:41:16.920+0100")
   (mh (str->time "2016-11-15T11:41:16.920+0100"))
