@@ -45,7 +45,7 @@
           planned-ts (str->time planned-str)
           _ @timer
           seconds-to-planned (till planned-ts)]
-      (if (<= 0 seconds-to-planned)
+      (if (<= -30 seconds-to-planned)
         [:li.departure
          {:title planned-str}
          [:span.mh (mh planned-ts)]
