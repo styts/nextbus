@@ -49,8 +49,8 @@
         [:li.departure
          {:title planned-str}
          [:span.mh (mh planned-ts)]
-         (if real-str [:span.real (seconds->ms seconds-to-planned)])
-         [:span.planned (int (divide seconds-to-planned 60))]
+         (if real-str [:span.real (seconds->ms seconds-to-planned)]
+         [:span.planned (int (divide seconds-to-planned 60))])
          ]))))
 
 (defn render-monitor [m]
