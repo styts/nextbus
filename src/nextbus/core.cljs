@@ -1,6 +1,6 @@
 (ns nextbus.core
     (:require [reagent.core :as reagent]
-              [nextbus.time :refer [seconds->ms str->time mh till]]
+              [nextbus.time :refer [seconds->ms str->time mh till minutes->color]]
               [nextbus.wienerlinien :refer [transform-data]]
               [nextbus.utils :as u]
               [nextbus.prefs :as prefs]
@@ -44,11 +44,15 @@
 (defn depart-li [idx departure]
   (if (valid-departure departure)
     (let [
+          ; timer is needed to potentially trigger a redraw of the <li> every second
+          _ @timer
           planned-str (:planned departure)
           real-str (:real departure)
           planned-ts (str->time planned-str)
-          _ @timer
+          ; integers
           seconds-to-planned (till planned-ts)
+          minutes-to-planned (int (divide seconds-to-planned 60))
+          ; currently "negative" or nothing
           li-class (li-class-helper seconds-to-planned)
           ]
       (if (<= -30 seconds-to-planned)
@@ -56,7 +60,8 @@
          {:title planned-str :class li-class}
          [:span.mh (mh planned-ts)]
          (if real-str [:span.real (seconds->ms seconds-to-planned)]
-         [:span.planned (int (divide seconds-to-planned 60))])
+         [:span.planned
+          minutes-to-planned])
          ]))))
 
 (defn render-monitor [m]

@@ -39,3 +39,23 @@
   (mh (str->time "2016-11-15T11:41:16.920+0100"))
   (counter (str->time "2016-11-15T11:41:16.920+0100"))
   )
+
+;;;;;;;;;;;;
+;  colors  ;
+; color array taken from:
+; http://gka.github.io/palettes/#colors=crimson,orange,yellow,white|steps=10|bez=1|coL=0
+;;;;;;;;;;;;
+; these are not used, because it's too much visual information overload for the user
+
+(def ^:private color-string "#dc143c #c21936 #a81c30 #8f1c2a #761b24 #5f1a1e #481718 #321313 #1e0c0a #000000")
+(def ^:private colors (clojure.string/split color-string #" "))
+
+(defn minutes->color [m]
+    (get colors m (last colors)))
+
+(comment
+  (minutes->color 8)
+  (minutes->color 9)
+  (minutes->color 10)
+  (minutes->color 11)
+  )
