@@ -55,7 +55,7 @@
           ; currently "negative" or nothing
           li-class (li-class-helper seconds-to-planned)
           ]
-      (if (<= -30 seconds-to-planned)
+      (if (<= -60 seconds-to-planned)
         [:li.departure
          {:title planned-str :class li-class}
          [:span.mh (mh planned-ts)]
